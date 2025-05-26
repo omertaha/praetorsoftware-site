@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Praetor Software - Innovative Digital Solutions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            border-radius: 4px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path d="M512 142c-20 0-40 3-60 7l-30 6c-25 8-48 20-70 35l-25 18c-22 17-42 37-58 60l-18 25c-16 24-28 50-36 78l-8 30c-7 28-10 57-8 86l2 30c3 29 10 57 21 84l12 28c12 26 28 50 47 72l20 22c20 20 43 37 68 50l26 13c26 12 54 20 82 24l30 4c28 3 57 1 85-5l29-7c28-7 54-18 78-33l24-16c23-16 44-36 62-58l18-24c17-24 30-50 39-78l9-29c8-29 12-58 11-88l-1-30c-2-29-8-58-18-85l-11-28c-11-27-26-51-44-73l-19-23c-19-21-41-39-66-53l-25-14c-25-13-53-22-81-26l-30-5c-10-1-20-2-30-2zm-288 380c0-80 25-154 68-216l18-24c18-23 39-43 62-60l24-17c24-15 50-27 77-35l28-7c27-7 55-10 84-9l29 2c29 2 57 8 84 18l27 10c26 11 51 26 73 44l22 19c21 19 40 41 56 66l15 25c15 25 26 52 33 80l7 28c6 28 8 57 6 86l-3 29c-3 29-10 57-21 84l-12 27c-12 26-28 51-47 72l-20 23c-20 20-43 37-68 50l-26 13c-26 12-54 20-82 24l-29 4c-29 3-58 1-86-5l-29-7c-28-7-54-18-78-33l-24-16c-23-16-44-35-61-58l-18-24c-17-24-30-50-39-78l-9-29c-8-28-11-58-10-87z"/><path d="M235 234l109 109c-13 32-21 66-23 101l-1 11h-85v85l1 11c2 35 10 69 23 101l-109 109 60 60 109-109c32 13 66 21 101 23l11 1v85h85l11-1c35-2 69-10 101-23l109 109 60-60-109-109c13-32 21-66 23-101l1-11v-85h-85l-11 1c-35 2-69 10-101 23l-109-109-60-60zm277 188c45 0 86 18 116 48s48 71 48 116-18 86-48 116-71 48-116 48-86-18-116-48-48-71-48-116 18-86 48-116 71-48 116-48z"/></svg>') no-repeat center;
+            mask-size: contain;
+            -webkit-mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path d="M512 142c-20 0-40 3-60 7l-30 6c-25 8-48 20-70 35l-25 18c-22 17-42 37-58 60l-18 25c-16 24-28 50-36 78l-8 30c-7 28-10 57-8 86l2 30c3 29 10 57 21 84l12 28c12 26 28 50 47 72l20 22c20 20 43 37 68 50l26 13c26 12 54 20 82 24l30 4c28 3 57 1 85-5l29-7c28-7 54-18 78-33l24-16c23-16 44-36 62-58l18-24c17-24 30-50 39-78l9-29c8-29 12-58 11-88l-1-30c-2-29-8-58-18-85l-11-28c-11-27-26-51-44-73l-19-23c-19-21-41-39-66-53l-25-14c-25-13-53-22-81-26l-30-5c-10-1-20-2-30-2zm-288 380c0-80 25-154 68-216l18-24c18-23 39-43 62-60l24-17c24-15 50-27 77-35l28-7c27-7 55-10 84-9l29 2c29 2 57 8 84 18l27 10c26 11 51 26 73 44l22 19c21 19 40 41 56 66l15 25c15 25 26 52 33 80l7 28c6 28 8 57 6 86l-3 29c-3 29-10 57-21 84l-12 27c-12 26-28 51-47 72l-20 23c-20 20-43 37-68 50l-26 13c-26 12-54 20-82 24l-29 4c-29 3-58 1-86-5l-29-7c-28-7-54-18-78-33l-24-16c-23-16-44-35-61-58l-18-24c-17-24-30-50-39-78l-9-29c-8-28-11-58-10-87z"/><path d="M235 234l109 109c-13 32-21 66-23 101l-1 11h-85v85l1 11c2 35 10 69 23 101l-109 109 60 60 109-109c32 13 66 21 101 23l11 1v85h85l11-1c35-2 69-10 101-23l109 109 60-60-109-109c13-32 21-66 23-101l1-11v-85h-85l-11 1c-35 2-69 10-101 23l-109-109-60-60zm277 188c45 0 86 18 116 48s48 71 48 116-18 86-48 116-71 48-116 48-86-18-116-48-48-71-48-116 18-86 48-116 71-48 116-48z"/></svg>') no-repeat center;
+            -webkit-mask-size: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #6366f1;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(ellipse at center, rgba(99, 102, 241, 0.1) 0%, rgba(10, 10, 10, 1) 70%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23ffffff" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%26grid)"/></svg>');
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-logo {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 2rem;
+            animation: fadeInUp 1s ease-out, pulse 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 30px rgba(99, 102, 241, 0.5));
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 30px rgba(99, 102, 241, 0.5)); }
+            50% { transform: scale(1.05); filter: drop-shadow(0 0 40px rgba(139, 92, 246, 0.7)); }
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ffffff, #6366f1, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .tagline {
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.8);
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.4);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(45deg, #ffffff, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* About Section */
+        .about {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(139, 92, 246, 0.05));
+            border-radius: 20px;
+            padding: 4rem 3rem;
+            margin: 3rem 0;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .about-content {
+            text-align: center;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .project-card:hover::before {
+            left: 100%;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .project-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .project-card p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+            border-radius: 20px;
+            padding: 4rem 3rem;
+            margin: 3rem 0;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: #ffffff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        .contact-info h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ffffff, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contact-info p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        /* Social Links */
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 3rem 0;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .social-link:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.5);
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 3rem 1rem;
+            }
+
+            .about,
+            .contact {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-icon"></div>
+                Praetor Software
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-logo">
+                <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="heroLogoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#6366f1"/>
+                            <stop offset="50%" style="stop-color:#8b5cf6"/>
+                            <stop offset="100%" style="stop-color:#6366f1"/>
+                        </linearGradient>
+                    </defs>
+                    <path fill="url(#heroLogoGradient)" d="M512 142c-20 0-40 3-60 7l-30 6c-25 8-48 20-70 35l-25 18c-22 17-42 37-58 60l-18 25c-16 24-28 50-36 78l-8 30c-7 28-10 57-8 86l2 30c3 29 10 57 21 84l12 28c12 26 28 50 47 72l20 22c20 20 43 37 68 50l26 13c26 12 54 20 82 24l30 4c28 3 57 1 85-5l29-7c28-7 54-18 78-33l24-16c23-16 44-36 62-58l18-24c17-24 30-50 39-78l9-29c8-29 12-58 11-88l-1-30c-2-29-8-58-18-85l-11-28c-11-27-26-51-44-73l-19-23c-19-21-41-39-66-53l-25-14c-25-13-53-22-81-26l-30-5c-10-1-20-2-30-2zm-288 380c0-80 25-154 68-216l18-24c18-23 39-43 62-60l24-17c24-15 50-27 77-35l28-7c27-7 55-10 84-9l29 2c29 2 57 8 84 18l27 10c26 11 51 26 73 44l22 19c21 19 40 41 56 66l15 25c15 25 26 52 33 80l7 28c6 28 8 57 6 86l-3 29c-3 29-10 57-21 84l-12 27c-12 26-28 51-47 72l-20 23c-20 20-43 37-68 50l-26 13c-26 12-54 20-82 24l-29 4c-29 3-58 1-86-5l-29-7c-28-7-54-18-78-33l-24-16c-23-16-44-35-61-58l-18-24c-17-24-30-50-39-78l-9-29c-8-28-11-58-10-87z"/>
+                    <path fill="url(#heroLogoGradient)" d="M235 234l109 109c-13 32-21 66-23 101l-1 11h-85v85l1 11c2 35 10 69 23 101l-109 109 60 60 109-109c32 13 66 21 101 23l11 1v85h85l11-1c35-2 69-10 101-23l109 109 60-60-109-109c13-32 21-66 23-101l1-11v-85h-85l-11 1c-35 2-69 10-101 23l-109-109-60-60zm277 188c45 0 86 18 116 48s48 71 48 116-18 86-48 116-71 48-116 48-86-18-116-48-48-71-48-116 18-86 48-116 71-48 116-48z"/>
+                </svg>
+            </div>
+            <h1>Praetor Software</h1>
+            <p class="tagline">Crafting Tomorrow's Digital Experiences Today</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="section-title fade-in">About Us</h2>
+        <div class="about fade-in">
+            <div class="about-content">
+                <p>At Praetor Software, I architect digital innovation through cutting-edge mobile applications, powerful Chrome extensions, and immersive PC games. My work pushes the boundaries of what's possible, crafting experiences that captivate users and showcase technical excellence. Each project represents a commitment to quality, innovation, and the relentless pursuit of digital perfection.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2 class="section-title fade-in">Featured Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card fade-in">
+                <div class="project-icon">📱</div>
+                <h3>NexGen Mobile App</h3>
+                <p>A revolutionary productivity app that leverages AI to optimize daily workflows. Features seamless cloud synchronization, intelligent task prioritization, and an intuitive interface that adapts to user behavior patterns.</p>
+            </div>
+            <div class="project-card fade-in">
+                <div class="project-icon">🔧</div>
+                <h3>WebFlow Chrome Extension</h3>
+                <p>A powerful browser extension that transforms how developers work with web APIs. Provides real-time debugging, automated testing capabilities, and seamless integration with popular development frameworks.</p>
+            </div>
+            <div class="project-card fade-in">
+                <div class="project-icon">🎮</div>
+                <h3>Quantum Realms PC Game</h3>
+                <p>An immersive sci-fi strategy game featuring procedurally generated universes, advanced AI opponents, and stunning visual effects powered by cutting-edge rendering technology.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2 class="section-title fade-in">Get In Touch</h2>
+        <div class="contact fade-in">
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Let's Connect</h3>
+                    <p>Interested in collaborating or learning more about my work? I'm always open to discussing innovative projects, sharing insights about software development, or exploring potential partnerships.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">💼</a>
+                        <a href="#" class="social-link">🐦</a>
+                        <a href="#" class="social-link">📧</a>
+                        <a href="#" class="social-link">🔗</a>
+                    </div>
+                </div>
+                <form class="contact-form" onsubmit="handleSubmit(event)">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Company</label>
+                        <input type="text" id="company" name="company">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" placeholder="Share your thoughts about my work or potential collaborations..." required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Praetor Software. All rights reserved. | praetorsoftware.com</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Navigation background on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(10, 10, 10, 0.98)';
+            } else {
+                nav.style.background = 'rgba(10, 10, 10, 0.95)';
+            }
+        });
+
+        // Form submission handler
+        function handleSubmit(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            
+            // Show success message (in a real implementation, this would send to a server)
+            const submitBtn = form.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Message Sent!';
+            submitBtn.style.background = 'linear-gradient(45deg, #10b981, #059669)';
+            
+            setTimeout(() => {
+                submitBtn.textContent = originalText;
+                submitBtn.style.background = 'linear-gradient(45deg, #6366f1, #8b5cf6)';
+                form.reset();
+            }, 3000);
+        }
+
+        // Add dynamic cursor effect
+        document.addEventListener('mousemove', (e) => {
+            const cursor = document.querySelector('.cursor');
+            if (!cursor) {
+                const newCursor = document.createElement('div');
+                newCursor.className = 'cursor';
+                newCursor.style.cssText = `
+                    position: fixed;
+                    width: 20px;
+                    height: 20px;
+                    background: radial-gradient(circle, rgba(99, 102, 241, 0.8), rgba(139, 92, 246, 0.4));
+                    border-radius: 50%;
+                    pointer-events: none;
+                    z-index: 9999;
+                    mix-blend-mode: difference;
+                    transition: transform 0.1s ease;
+                `;
+                document.body.appendChild(newCursor);
+            }
+            
+            const cursorElement = document.querySelector('.cursor');
+            cursorElement.style.left = e.clientX - 10 + 'px';
+            cursorElement.style.top = e.clientY - 10 + 'px';
+        });
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
